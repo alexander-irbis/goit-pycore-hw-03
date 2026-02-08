@@ -37,6 +37,20 @@
        validated against the full standard (in production, skipping full validation will cause failures)
      - Murphy’s law (practical reminder): "If anything can go wrong, it will."
 
+4. **Task #4: upcoming birthdays (`get_upcoming_birthdays`)**
+   - Function: `get_upcoming_birthdays(users: list[dict[str, str]], as_of_date: date | None = None) -> list[dict[str, str]]`
+   - Input (`users`): list of dicts, each item has:
+     - `name` — `str`
+     - `birthday` — `str` in `YYYY.MM.DD` format
+   - Output: list of dicts, each item has:
+     - `name` — `str`
+     - `congratulation_date` — `str` in `YYYY.MM.DD` format
+   - Behavior:
+     - selects users whose birthday occurrence date is within the next **7 days**, including today:
+       - window semantics: `[as_of_date, as_of_date + 7 days)` (half-open; excludes exactly `+7` days to avoid weekly overlap)
+     - if a selected birthday falls on Saturday/Sunday, shifts `congratulation_date` to the nearest Monday
+     - leap-day policy: birthdays on Feb 29 are celebrated on Mar 1 in non-leap years
+
 ## Quick start
 
 ```bash
