@@ -23,6 +23,20 @@
      - a list of `quantity` unique random integers in the inclusive range `[min, max]`, sorted ascending
      - `[]` on invalid parameters (wrong type or out of allowed range)
 
+3. **Task #3: phone normalization (`normalize_phone`)**
+   - Function: `normalize_phone(phone_number: str) -> str`
+   - Behavior:
+     - keeps only digits, and ensures the result starts with a single leading `+`
+     - determines whether the input is in international form by checking for a leading `+` in the raw input
+     - if the raw input does **not** start with `+` (no leading `+`):
+       - if the cleaned number starts with the domestic trunk prefix `0`, the function prepends `38` (Ukraine assumption) so it becomes `380...`
+     - finally, if the normalized number does not start with `+`, the function prepends `+`
+   - Note:
+     - per the assignment statement ("This guarantees that all numbers will be suitable for sending SMS"),
+       this is treated as a happy-path normalization task; the resulting “international number” is not
+       validated against the full standard (in production, skipping full validation will cause failures)
+     - Murphy’s law (practical reminder): "If anything can go wrong, it will."
+
 ## Quick start
 
 ```bash
