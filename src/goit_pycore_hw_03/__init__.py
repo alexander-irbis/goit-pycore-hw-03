@@ -2,7 +2,14 @@
 
 from .get_days import get_days_from_date, get_days_from_today
 from .hello import hello
+from .numbers_ticket import get_numbers_ticket
 
 __version__ = "0.1.0"
 
-__all__ = ["__version__", "hello", "get_days_from_date", "get_days_from_today"]
+__all__ = [
+    "__version__",
+    "hello",
+    "get_days_from_date",
+    "get_days_from_today",
+    "get_numbers_ticket",
+]
