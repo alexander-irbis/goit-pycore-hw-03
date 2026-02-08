@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: poetry.lock
+
+      - name: Install Poetry
+        run: python -m pip install --upgrade pip && python -m pip install poetry
+
+      - name: Validate project metadata
+        run: poetry check --no-interaction --no-ansi
+
+      - name: Install dependencies
+        run: poetry install --with dev --sync --no-interaction --no-ansi
+
+      - name: Run tests
+        run: poetry run pytest
+
